@@ -62,6 +62,73 @@
       margin-inline: auto;
     }
 
+    /* ── Origin counter ── */
+    .counter-wrap {
+      display: inline-flex;
+      flex-direction: column;
+      align-items: center;
+      gap: .6rem;
+      margin-top: 2.2rem;
+      padding: 1.4rem 2rem;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      position: relative;
+      z-index: 1;
+    }
+    .counter-label {
+      font-size: .75rem;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+    .counter-digits {
+      display: flex;
+      gap: .5rem;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+    .counter-unit {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: .2rem;
+    }
+    .counter-num {
+      font-size: clamp(1.4rem, 3.5vw, 2rem);
+      font-weight: 800;
+      font-variant-numeric: tabular-nums;
+      background: linear-gradient(135deg, var(--accent1), var(--accent2));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      min-width: 2.4ch;
+      text-align: center;
+      line-height: 1;
+    }
+    .counter-unit-label {
+      font-size: .62rem;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+    .counter-sep {
+      font-size: 1.5rem;
+      font-weight: 300;
+      color: var(--border);
+      align-self: flex-start;
+      margin-top: .15rem;
+    }
+    .counter-link {
+      font-size: .78rem;
+      color: var(--accent2);
+      text-decoration: none;
+      border-bottom: 1px dashed var(--accent2);
+      opacity: .8;
+      transition: opacity .2s;
+    }
+    .counter-link:hover { opacity: 1; }
+
     /* ── Decade filter ── */
     .filters {
       display: flex;
@@ -280,6 +347,41 @@
 <header>
   <h1>Historia de la<br>Inteligencia Artificial</h1>
   <p>Cuatro décadas de avances que cambiaron el mundo</p>
+
+  <div class="counter-wrap">
+    <div class="counter-label">La IA lleva estudiándose</div>
+    <div class="counter-digits">
+      <div class="counter-unit">
+        <span class="counter-num" id="c-years">0</span>
+        <span class="counter-unit-label">años</span>
+      </div>
+      <span class="counter-sep">·</span>
+      <div class="counter-unit">
+        <span class="counter-num" id="c-days">000</span>
+        <span class="counter-unit-label">días</span>
+      </div>
+      <span class="counter-sep">·</span>
+      <div class="counter-unit">
+        <span class="counter-num" id="c-hours">00</span>
+        <span class="counter-unit-label">horas</span>
+      </div>
+      <span class="counter-sep">·</span>
+      <div class="counter-unit">
+        <span class="counter-num" id="c-mins">00</span>
+        <span class="counter-unit-label">min</span>
+      </div>
+      <span class="counter-sep">·</span>
+      <div class="counter-unit">
+        <span class="counter-num" id="c-secs">00</span>
+        <span class="counter-unit-label">seg</span>
+      </div>
+    </div>
+    <a class="counter-link"
+       href="https://es.wikipedia.org/wiki/Conferencia_de_Dartmouth"
+       target="_blank" rel="noopener">
+      Desde la Conferencia de Dartmouth · 18 jun 1956 ↗
+    </a>
+  </div>
 </header>
 
 <!-- Legend -->
@@ -535,6 +637,37 @@
 </footer>
 
 <script>
+  // ── Origin counter ──
+  (function () {
+    // Dartmouth Conference on Artificial Intelligence — 18 June 1956
+    const ORIGIN = new Date('1956-06-18T09:00:00Z').getTime();
+
+    function pad(n, w) { return String(n).padStart(w, '0'); }
+
+    function tick() {
+      const diff = Date.now() - ORIGIN;
+      const totalSecs  = Math.floor(diff / 1000);
+      const secs       = totalSecs % 60;
+      const totalMins  = Math.floor(totalSecs / 60);
+      const mins       = totalMins % 60;
+      const totalHours = Math.floor(totalMins / 60);
+      const hours      = totalHours % 24;
+      const totalDays  = Math.floor(totalHours / 24);
+      // Approximate years (365.2425 days/year)
+      const years      = Math.floor(totalDays / 365.2425);
+      const remDays    = totalDays - Math.floor(years * 365.2425);
+
+      document.getElementById('c-years').textContent = years;
+      document.getElementById('c-days').textContent  = pad(remDays, 3);
+      document.getElementById('c-hours').textContent = pad(hours, 2);
+      document.getElementById('c-mins').textContent  = pad(mins, 2);
+      document.getElementById('c-secs').textContent  = pad(secs, 2);
+    }
+
+    tick();
+    setInterval(tick, 1000);
+  })();
+
   // ── Intersection Observer for fade-in ──
   const events = document.querySelectorAll('.event');
   const io = new IntersectionObserver(entries => {
