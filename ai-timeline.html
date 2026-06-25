@@ -129,6 +129,25 @@
     }
     .counter-link:hover { opacity: 1; }
 
+    /* ── Card read-more link ── */
+    .card-link {
+      display: inline-block;
+      margin-top: .75rem;
+      font-size: .72rem;
+      font-weight: 600;
+      letter-spacing: .5px;
+      text-decoration: none;
+      opacity: .65;
+      transition: opacity .2s;
+    }
+    .card-link:hover { opacity: 1; }
+    /* inherits colour from parent category via currentColor trick */
+    .event.cat-research  .card-link { color: #818cf8; }
+    .event.cat-hardware  .card-link { color: #22d3ee; }
+    .event.cat-milestone .card-link { color: #f472b6; }
+    .event.cat-model     .card-link { color: #34d399; }
+    .event.cat-product   .card-link { color: #fbbf24; }
+
     /* ── Decade filter ── */
     .filters {
       display: flex;
@@ -396,20 +415,20 @@
 <!-- Decade filter -->
 <div class="filters">
   <button class="active" data-filter="all">Todos</button>
-  <button data-filter="1950">1950s</button>
-  <button data-filter="1960">1960s</button>
-  <button data-filter="1970">1970s</button>
-  <button data-filter="1980">1980s</button>
-  <button data-filter="1990">1990s</button>
-  <button data-filter="2000">2000s</button>
-  <button data-filter="2010">2010s</button>
-  <button data-filter="2020">2020s</button>
+  <button data-filter="1950">1950's</button>
+  <button data-filter="1960">1960's</button>
+  <button data-filter="1970">1970's</button>
+  <button data-filter="1980">1980's</button>
+  <button data-filter="1990">1990's</button>
+  <button data-filter="2000">2000's</button>
+  <button data-filter="2010">2010's</button>
+  <button data-filter="2020">2020's</button>
 </div>
 
 <div class="timeline" id="timeline">
 
   <!-- ══ 1950s ══ -->
-  <div class="decade-label" data-decade="1950"><span>1950s</span></div>
+  <div class="decade-label" data-decade="1950"><span>1950's</span></div>
 
   <div class="event cat-milestone" data-decade="1950">
     <div class="dot"></div><div class="spacer"></div>
@@ -417,6 +436,8 @@
       <div class="card-year">1956</div>
       <div class="card-title">Conferencia de Dartmouth — Nace la IA</div>
       <div class="card-desc">John McCarthy, Marvin Minsky y otros reúnen a los mejores científicos del momento. Se acuña oficialmente el término «Inteligencia Artificial» y se define el campo como disciplina.</div>
+      <a class="card-link" href="https://es.wikipedia.org/wiki/Conferencia_de_Dartmouth" target="_blank" rel="noopener noreferrer">Leer más ↗</a>
+
       <span class="tag cat-milestone">Hito histórico</span>
     </div>
   </div>
@@ -427,6 +448,8 @@
       <div class="card-year">1957</div>
       <div class="card-title">Perceptrón de Rosenblatt</div>
       <div class="card-desc">Frank Rosenblatt presenta el Perceptrón en Cornell, la primera red neuronal artificial capaz de aprender mediante ejemplos. Genera enorme expectativa en la prensa.</div>
+      <a class="card-link" href="https://es.wikipedia.org/wiki/Perceptr%C3%B3n" target="_blank" rel="noopener noreferrer">Leer más ↗</a>
+
       <span class="tag cat-model">Modelo</span>
     </div>
   </div>
@@ -437,12 +460,14 @@
       <div class="card-year">1958</div>
       <div class="card-title">LISP — El lenguaje de la IA</div>
       <div class="card-desc">John McCarthy diseña LISP, el primer lenguaje pensado para procesamiento simbólico. Dominará la investigación en IA durante más de tres décadas.</div>
+      <a class="card-link" href="https://es.wikipedia.org/wiki/Lisp" target="_blank" rel="noopener noreferrer">Leer más ↗</a>
+
       <span class="tag cat-research">Investigación</span>
     </div>
   </div>
 
   <!-- ══ 1960s ══ -->
-  <div class="decade-label" data-decade="1960"><span>1960s</span></div>
+  <div class="decade-label" data-decade="1960"><span>1960's</span></div>
 
   <div class="event cat-product" data-decade="1960">
     <div class="dot"></div><div class="spacer"></div>
@@ -450,6 +475,8 @@
       <div class="card-year">1965</div>
       <div class="card-title">ELIZA — El primer chatbot</div>
       <div class="card-desc">Joseph Weizenbaum crea ELIZA en el MIT, programa que simula una conversación terapéutica. Los usuarios se convencen de hablar con una persona real, anticipando debates sobre la IA social.</div>
+      <a class="card-link" href="https://es.wikipedia.org/wiki/ELIZA" target="_blank" rel="noopener noreferrer">Leer más ↗</a>
+
       <span class="tag cat-product">Producto</span>
     </div>
   </div>
@@ -460,6 +487,8 @@
       <div class="card-year">1966</div>
       <div class="card-title">Shakey — El primer robot razonador</div>
       <div class="card-desc">Stanford Research Institute construye Shakey, el primer robot capaz de planificar acciones y navegar entornos reales combinando percepción, razonamiento y movimiento.</div>
+      <a class="card-link" href="https://en.wikipedia.org/wiki/Shakey_the_robot" target="_blank" rel="noopener noreferrer">Leer más ↗</a>
+
       <span class="tag cat-hardware">Hardware</span>
     </div>
   </div>
@@ -470,12 +499,14 @@
       <div class="card-year">1969</div>
       <div class="card-title">«Perceptrons» — Las limitaciones al descubierto</div>
       <div class="card-desc">Minsky y Papert publican su libro demostrando matemáticamente las limitaciones del Perceptrón. La financiación en IA se desploma, dando inicio al Primer Invierno de la IA.</div>
+      <a class="card-link" href="https://en.wikipedia.org/wiki/Perceptrons_(book)" target="_blank" rel="noopener noreferrer">Leer más ↗</a>
+
       <span class="tag cat-research">Investigación</span>
     </div>
   </div>
 
   <!-- ══ 1970s ══ -->
-  <div class="decade-label" data-decade="1970"><span>1970s</span></div>
+  <div class="decade-label" data-decade="1970"><span>1970's</span></div>
 
   <div class="event cat-research" data-decade="1970">
     <div class="dot"></div><div class="spacer"></div>
@@ -483,6 +514,8 @@
       <div class="card-year">1972</div>
       <div class="card-title">PROLOG — Programación lógica</div>
       <div class="card-desc">Alain Colmerauer y Philippe Roussel crean PROLOG en Marsella, lenguaje declarativo basado en lógica de predicados. Se convierte en pilar de los sistemas expertos europeos.</div>
+      <a class="card-link" href="https://es.wikipedia.org/wiki/Prolog" target="_blank" rel="noopener noreferrer">Leer más ↗</a>
+
       <span class="tag cat-research">Investigación</span>
     </div>
   </div>
@@ -493,6 +526,8 @@
       <div class="card-year">1973</div>
       <div class="card-title">Informe Lighthill — Primer Invierno de la IA</div>
       <div class="card-desc">El matemático James Lighthill entrega al gobierno británico un devastador informe criticando la IA. El recorte de fondos es inmediato y global, paralizando la investigación durante años.</div>
+      <a class="card-link" href="https://en.wikipedia.org/wiki/Lighthill_report" target="_blank" rel="noopener noreferrer">Leer más ↗</a>
+
       <span class="tag cat-milestone">Hito histórico</span>
     </div>
   </div>
@@ -503,12 +538,14 @@
       <div class="card-year">1979</div>
       <div class="card-title">Stanford Cart — Vehículo autónomo pionero</div>
       <div class="card-desc">Hans Moravec programa el Stanford Cart para recorrer una sala sorteando obstáculos de forma autónoma usando visión estéreo. Tardó 5 horas en cruzar 20 metros, pero lo logró.</div>
+      <a class="card-link" href="https://en.wikipedia.org/wiki/Stanford_cart" target="_blank" rel="noopener noreferrer">Leer más ↗</a>
+
       <span class="tag cat-hardware">Hardware</span>
     </div>
   </div>
 
   <!-- ══ 1980s ══ -->
-  <div class="decade-label" data-decade="1980"><span>1980s</span></div>
+  <div class="decade-label" data-decade="1980"><span>1980's</span></div>
 
   <div class="event cat-product" data-decade="1980">
     <div class="dot"></div><div class="spacer"></div>
@@ -516,6 +553,8 @@
       <div class="card-year">1980</div>
       <div class="card-title">Boom de los Sistemas Expertos</div>
       <div class="card-desc">Empresas como DEC adoptan sistemas expertos (XCON) en producción. La IA parece lista para dominar la industria.</div>
+      <a class="card-link" href="https://es.wikipedia.org/wiki/Sistema_experto" target="_blank" rel="noopener noreferrer">Leer más ↗</a>
+
       <span class="tag cat-product">Producto</span>
     </div>
   </div>
@@ -526,6 +565,8 @@
       <div class="card-year">1986</div>
       <div class="card-title">Retropropagación popularizada</div>
       <div class="card-desc">Rumelhart, Hinton y Williams publican el algoritmo de backpropagation, base del entrenamiento de redes neuronales profundas.</div>
+      <a class="card-link" href="https://es.wikipedia.org/wiki/Retropropagaci%C3%B3n" target="_blank" rel="noopener noreferrer">Leer más ↗</a>
+
       <span class="tag cat-research">Investigación</span>
     </div>
   </div>
@@ -536,12 +577,14 @@
       <div class="card-year">1989</div>
       <div class="card-title">LeNet — Primeras CNN</div>
       <div class="card-desc">Yann LeCun desarrolla LeNet en Bell Labs, la primera red convolucional funcional para reconocimiento de dígitos escritos a mano.</div>
+      <a class="card-link" href="https://es.wikipedia.org/wiki/LeNet" target="_blank" rel="noopener noreferrer">Leer más ↗</a>
+
       <span class="tag cat-model">Modelo</span>
     </div>
   </div>
 
   <!-- ══ 1990s ══ -->
-  <div class="decade-label" data-decade="1990"><span>1990s</span></div>
+  <div class="decade-label" data-decade="1990"><span>1990's</span></div>
 
   <div class="event cat-milestone" data-decade="1990">
     <div class="dot"></div><div class="spacer"></div>
@@ -549,6 +592,8 @@
       <div class="card-year">1997</div>
       <div class="card-title">Deep Blue vence a Kasparov</div>
       <div class="card-desc">La supercomputadora de IBM derrota al campeón mundial de ajedrez Garry Kasparov, marcando un hito simbólico para la IA.</div>
+      <a class="card-link" href="https://es.wikipedia.org/wiki/Deep_Blue" target="_blank" rel="noopener noreferrer">Leer más ↗</a>
+
       <span class="tag cat-milestone">Hito histórico</span>
     </div>
   </div>
@@ -559,12 +604,14 @@
       <div class="card-year">1998</div>
       <div class="card-title">LSTM y memoria a largo plazo</div>
       <div class="card-desc">Hochreiter y Schmidhuber perfeccionan las redes LSTM, capaces de aprender dependencias temporales largas, clave para NLP y voz.</div>
+      <a class="card-link" href="https://es.wikipedia.org/wiki/Memoria_a_corto_y_largo_plazo" target="_blank" rel="noopener noreferrer">Leer más ↗</a>
+
       <span class="tag cat-research">Investigación</span>
     </div>
   </div>
 
   <!-- ══ 2000s ══ -->
-  <div class="decade-label" data-decade="2000"><span>2000s</span></div>
+  <div class="decade-label" data-decade="2000"><span>2000's</span></div>
 
   <div class="event cat-research" data-decade="2000">
     <div class="dot"></div><div class="spacer"></div>
@@ -572,6 +619,8 @@
       <div class="card-year">2006</div>
       <div class="card-title">Renacimiento del Deep Learning</div>
       <div class="card-desc">Geoffrey Hinton publica las Deep Belief Networks, demostrando que las redes profundas pueden entrenarse capa a capa de forma eficiente.</div>
+      <a class="card-link" href="https://www.cs.toronto.edu/~hinton/absps/fastnc.pdf" target="_blank" rel="noopener noreferrer">Leer más ↗</a>
+
       <span class="tag cat-research">Investigación</span>
     </div>
   </div>
@@ -582,12 +631,14 @@
       <div class="card-year">2009</div>
       <div class="card-title">Dataset ImageNet</div>
       <div class="card-desc">Fei-Fei Li lanza ImageNet con más de 14 millones de imágenes etiquetadas, catalizador del boom de visión artificial de la siguiente década.</div>
+      <a class="card-link" href="https://es.wikipedia.org/wiki/ImageNet" target="_blank" rel="noopener noreferrer">Leer más ↗</a>
+
       <span class="tag cat-hardware">Datos</span>
     </div>
   </div>
 
   <!-- ══ 2010s ══ -->
-  <div class="decade-label" data-decade="2010"><span>2010s</span></div>
+  <div class="decade-label" data-decade="2010"><span>2010's</span></div>
 
   <div class="event cat-milestone" data-decade="2010">
     <div class="dot"></div><div class="spacer"></div>
@@ -595,6 +646,8 @@
       <div class="card-year">2011</div>
       <div class="card-title">IBM Watson gana en Jeopardy!</div>
       <div class="card-desc">Watson derrota a los dos mejores campeones humanos de Jeopardy!, demostrando comprensión del lenguaje natural a gran escala.</div>
+      <a class="card-link" href="https://es.wikipedia.org/wiki/Watson_(inteligencia_artificial)" target="_blank" rel="noopener noreferrer">Leer más ↗</a>
+
       <span class="tag cat-milestone">Hito histórico</span>
     </div>
   </div>
@@ -605,6 +658,8 @@
       <div class="card-year">2012</div>
       <div class="card-title">AlexNet — Revolución del Deep Learning</div>
       <div class="card-desc">AlexNet gana ImageNet con una precisión sin precedentes usando GPUs, iniciando la era moderna del aprendizaje profundo.</div>
+      <a class="card-link" href="https://es.wikipedia.org/wiki/AlexNet" target="_blank" rel="noopener noreferrer">Leer más ↗</a>
+
       <span class="tag cat-model">Modelo</span>
     </div>
   </div>
@@ -615,6 +670,8 @@
       <div class="card-year">2014</div>
       <div class="card-title">GANs — Redes Generativas Adversarias</div>
       <div class="card-desc">Ian Goodfellow propone las GAN, donde dos redes compiten entre sí. Base de la generación de imágenes realistas y deepfakes.</div>
+      <a class="card-link" href="https://arxiv.org/abs/1406.2661" target="_blank" rel="noopener noreferrer">Leer más ↗</a>
+
       <span class="tag cat-research">Investigación</span>
     </div>
   </div>
@@ -625,6 +682,8 @@
       <div class="card-year">2016</div>
       <div class="card-title">AlphaGo vence a Lee Sedol</div>
       <div class="card-desc">DeepMind derrota al campeón mundial de Go, juego considerado el gran reto del razonamiento intuitivo, usando aprendizaje por refuerzo.</div>
+      <a class="card-link" href="https://es.wikipedia.org/wiki/AlphaGo" target="_blank" rel="noopener noreferrer">Leer más ↗</a>
+
       <span class="tag cat-milestone">Hito histórico</span>
     </div>
   </div>
@@ -635,6 +694,8 @@
       <div class="card-year">2017</div>
       <div class="card-title">Arquitectura Transformer</div>
       <div class="card-desc">"Attention is All You Need" de Google Brain introduce los Transformers, la arquitectura que subyace a todos los LLMs modernos.</div>
+      <a class="card-link" href="https://arxiv.org/abs/1706.03762" target="_blank" rel="noopener noreferrer">Leer más ↗</a>
+
       <span class="tag cat-model">Modelo</span>
     </div>
   </div>
@@ -645,6 +706,8 @@
       <div class="card-year">2018</div>
       <div class="card-title">BERT y GPT-1</div>
       <div class="card-desc">Google lanza BERT (comprensión bidireccional) y OpenAI presenta GPT-1, sentando las bases del preentrenamiento a gran escala.</div>
+      <a class="card-link" href="https://es.wikipedia.org/wiki/BERT_(modelo_de_lenguaje)" target="_blank" rel="noopener noreferrer">Leer más ↗</a>
+
       <span class="tag cat-model">Modelo</span>
     </div>
   </div>
@@ -655,12 +718,14 @@
       <div class="card-year">2019</div>
       <div class="card-title">GPT-2 — Demasiado peligroso para publicar</div>
       <div class="card-desc">OpenAI retarda la publicación de GPT-2 alegando riesgo de desinformación, generando debate global sobre la ética en IA.</div>
+      <a class="card-link" href="https://es.wikipedia.org/wiki/GPT-2" target="_blank" rel="noopener noreferrer">Leer más ↗</a>
+
       <span class="tag cat-product">Producto</span>
     </div>
   </div>
 
   <!-- ══ 2020s ══ -->
-  <div class="decade-label" data-decade="2020"><span>2020s</span></div>
+  <div class="decade-label" data-decade="2020"><span>2020's</span></div>
 
   <div class="event cat-model" data-decade="2020">
     <div class="dot"></div><div class="spacer"></div>
@@ -668,6 +733,8 @@
       <div class="card-year">2020</div>
       <div class="card-title">GPT-3 — 175 000 millones de parámetros</div>
       <div class="card-desc">OpenAI lanza GPT-3, mostrando que escalar parámetros produce capacidades emergentes sorprendentes de razonamiento y código.</div>
+      <a class="card-link" href="https://es.wikipedia.org/wiki/GPT-3" target="_blank" rel="noopener noreferrer">Leer más ↗</a>
+
       <span class="tag cat-model">Modelo</span>
     </div>
   </div>
@@ -678,6 +745,8 @@
       <div class="card-year">2021</div>
       <div class="card-title">AlphaFold 2 — Biología proteica resuelta</div>
       <div class="card-desc">DeepMind resuelve el problema del plegamiento de proteínas con precisión atómica, revolucionando la biología estructural y la medicina.</div>
+      <a class="card-link" href="https://es.wikipedia.org/wiki/AlphaFold" target="_blank" rel="noopener noreferrer">Leer más ↗</a>
+
       <span class="tag cat-milestone">Hito histórico</span>
     </div>
   </div>
@@ -688,6 +757,8 @@
       <div class="card-year">2021</div>
       <div class="card-title">GitHub Copilot y DALL-E</div>
       <div class="card-desc">GitHub Copilot lleva la IA al código profesional. DALL-E demuestra generación de imágenes desde texto, abriendo la era multimodal.</div>
+      <a class="card-link" href="https://es.wikipedia.org/wiki/DALL-E" target="_blank" rel="noopener noreferrer">Leer más ↗</a>
+
       <span class="tag cat-product">Producto</span>
     </div>
   </div>
@@ -698,6 +769,8 @@
       <div class="card-year">2022</div>
       <div class="card-title">ChatGPT — La IA llega al gran público</div>
       <div class="card-desc">ChatGPT alcanza 1 millón de usuarios en 5 días. Stable Diffusion democratiza la generación de imágenes de código abierto.</div>
+      <a class="card-link" href="https://es.wikipedia.org/wiki/ChatGPT" target="_blank" rel="noopener noreferrer">Leer más ↗</a>
+
       <span class="tag cat-product">Producto</span>
     </div>
   </div>
@@ -708,6 +781,8 @@
       <div class="card-year">2023</div>
       <div class="card-title">GPT-4, Llama, Gemini y Claude</div>
       <div class="card-desc">Explosión de modelos frontier: GPT-4 supera el bar del examen MBE. Meta abre Llama. Google lanza Gemini. Anthropic lanza Claude.</div>
+      <a class="card-link" href="https://es.wikipedia.org/wiki/GPT-4" target="_blank" rel="noopener noreferrer">Leer más ↗</a>
+
       <span class="tag cat-model">Modelo</span>
     </div>
   </div>
@@ -718,6 +793,8 @@
       <div class="card-year">2024</div>
       <div class="card-title">Sora, GPT-4o y modelos multimodales</div>
       <div class="card-desc">OpenAI presenta Sora (vídeo desde texto) y GPT-4o (voz, imagen y texto en tiempo real). Los modelos de razonamiento o1 emergen.</div>
+      <a class="card-link" href="https://es.wikipedia.org/wiki/Sora_(inteligencia_artificial)" target="_blank" rel="noopener noreferrer">Leer más ↗</a>
+
       <span class="tag cat-product">Producto</span>
     </div>
   </div>
@@ -728,6 +805,8 @@
       <div class="card-year">2025</div>
       <div class="card-title">Era de los Agentes de IA</div>
       <div class="card-desc">Claude 4, GPT-5 y Gemini 3 lideran el cambio hacia agentes autónomos capaces de planear, ejecutar código y resolver tareas complejas de forma independiente.</div>
+      <a class="card-link" href="https://es.wikipedia.org/wiki/Agente_inteligente" target="_blank" rel="noopener noreferrer">Leer más ↗</a>
+
       <span class="tag cat-milestone">Hito histórico</span>
     </div>
   </div>
