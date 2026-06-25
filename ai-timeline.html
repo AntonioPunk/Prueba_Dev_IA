@@ -346,7 +346,7 @@
 
 <header>
   <h1>Historia de la<br>Inteligencia Artificial</h1>
-  <p>Cuatro décadas de avances que cambiaron el mundo</p>
+  <p>Casi siete décadas de avances que cambiaron el mundo</p>
 
   <div class="counter-wrap">
     <div class="counter-label">La IA lleva estudiándose</div>
@@ -396,6 +396,9 @@
 <!-- Decade filter -->
 <div class="filters">
   <button class="active" data-filter="all">Todos</button>
+  <button data-filter="1950">1950s</button>
+  <button data-filter="1960">1960s</button>
+  <button data-filter="1970">1970s</button>
   <button data-filter="1980">1980s</button>
   <button data-filter="1990">1990s</button>
   <button data-filter="2000">2000s</button>
@@ -404,6 +407,105 @@
 </div>
 
 <div class="timeline" id="timeline">
+
+  <!-- ══ 1950s ══ -->
+  <div class="decade-label" data-decade="1950"><span>1950s</span></div>
+
+  <div class="event cat-milestone" data-decade="1950">
+    <div class="dot"></div><div class="spacer"></div>
+    <div class="card">
+      <div class="card-year">1956</div>
+      <div class="card-title">Conferencia de Dartmouth — Nace la IA</div>
+      <div class="card-desc">John McCarthy, Marvin Minsky y otros reúnen a los mejores científicos del momento. Se acuña oficialmente el término «Inteligencia Artificial» y se define el campo como disciplina.</div>
+      <span class="tag cat-milestone">Hito histórico</span>
+    </div>
+  </div>
+
+  <div class="event cat-model" data-decade="1950">
+    <div class="dot"></div><div class="spacer"></div>
+    <div class="card">
+      <div class="card-year">1957</div>
+      <div class="card-title">Perceptrón de Rosenblatt</div>
+      <div class="card-desc">Frank Rosenblatt presenta el Perceptrón en Cornell, la primera red neuronal artificial capaz de aprender mediante ejemplos. Genera enorme expectativa en la prensa.</div>
+      <span class="tag cat-model">Modelo</span>
+    </div>
+  </div>
+
+  <div class="event cat-research" data-decade="1950">
+    <div class="dot"></div><div class="spacer"></div>
+    <div class="card">
+      <div class="card-year">1958</div>
+      <div class="card-title">LISP — El lenguaje de la IA</div>
+      <div class="card-desc">John McCarthy diseña LISP, el primer lenguaje pensado para procesamiento simbólico. Dominará la investigación en IA durante más de tres décadas.</div>
+      <span class="tag cat-research">Investigación</span>
+    </div>
+  </div>
+
+  <!-- ══ 1960s ══ -->
+  <div class="decade-label" data-decade="1960"><span>1960s</span></div>
+
+  <div class="event cat-product" data-decade="1960">
+    <div class="dot"></div><div class="spacer"></div>
+    <div class="card">
+      <div class="card-year">1965</div>
+      <div class="card-title">ELIZA — El primer chatbot</div>
+      <div class="card-desc">Joseph Weizenbaum crea ELIZA en el MIT, programa que simula una conversación terapéutica. Los usuarios se convencen de hablar con una persona real, anticipando debates sobre la IA social.</div>
+      <span class="tag cat-product">Producto</span>
+    </div>
+  </div>
+
+  <div class="event cat-hardware" data-decade="1960">
+    <div class="dot"></div><div class="spacer"></div>
+    <div class="card">
+      <div class="card-year">1966</div>
+      <div class="card-title">Shakey — El primer robot razonador</div>
+      <div class="card-desc">Stanford Research Institute construye Shakey, el primer robot capaz de planificar acciones y navegar entornos reales combinando percepción, razonamiento y movimiento.</div>
+      <span class="tag cat-hardware">Hardware</span>
+    </div>
+  </div>
+
+  <div class="event cat-research" data-decade="1960">
+    <div class="dot"></div><div class="spacer"></div>
+    <div class="card">
+      <div class="card-year">1969</div>
+      <div class="card-title">«Perceptrons» — Las limitaciones al descubierto</div>
+      <div class="card-desc">Minsky y Papert publican su libro demostrando matemáticamente las limitaciones del Perceptrón. La financiación en IA se desploma, dando inicio al Primer Invierno de la IA.</div>
+      <span class="tag cat-research">Investigación</span>
+    </div>
+  </div>
+
+  <!-- ══ 1970s ══ -->
+  <div class="decade-label" data-decade="1970"><span>1970s</span></div>
+
+  <div class="event cat-research" data-decade="1970">
+    <div class="dot"></div><div class="spacer"></div>
+    <div class="card">
+      <div class="card-year">1972</div>
+      <div class="card-title">PROLOG — Programación lógica</div>
+      <div class="card-desc">Alain Colmerauer y Philippe Roussel crean PROLOG en Marsella, lenguaje declarativo basado en lógica de predicados. Se convierte en pilar de los sistemas expertos europeos.</div>
+      <span class="tag cat-research">Investigación</span>
+    </div>
+  </div>
+
+  <div class="event cat-milestone" data-decade="1970">
+    <div class="dot"></div><div class="spacer"></div>
+    <div class="card">
+      <div class="card-year">1973</div>
+      <div class="card-title">Informe Lighthill — Primer Invierno de la IA</div>
+      <div class="card-desc">El matemático James Lighthill entrega al gobierno británico un devastador informe criticando la IA. El recorte de fondos es inmediato y global, paralizando la investigación durante años.</div>
+      <span class="tag cat-milestone">Hito histórico</span>
+    </div>
+  </div>
+
+  <div class="event cat-hardware" data-decade="1970">
+    <div class="dot"></div><div class="spacer"></div>
+    <div class="card">
+      <div class="card-year">1979</div>
+      <div class="card-title">Stanford Cart — Vehículo autónomo pionero</div>
+      <div class="card-desc">Hans Moravec programa el Stanford Cart para recorrer una sala sorteando obstáculos de forma autónoma usando visión estéreo. Tardó 5 horas en cruzar 20 metros, pero lo logró.</div>
+      <span class="tag cat-hardware">Hardware</span>
+    </div>
+  </div>
 
   <!-- ══ 1980s ══ -->
   <div class="decade-label" data-decade="1980"><span>1980s</span></div>
@@ -633,7 +735,7 @@
 </div><!-- /.timeline -->
 
 <footer>
-  Línea de tiempo de la IA &mdash; Principales hitos desde 1980 hasta 2025
+  Línea de tiempo de la IA &mdash; Principales hitos desde 1956 hasta 2025
 </footer>
 
 <script>
