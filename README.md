@@ -1,6 +1,6 @@
 # AI Timeline
 
-An interactive, single-page timeline of Artificial Intelligence milestones from the 1980s to the present day. No frameworks, no build step, no dependencies — just one HTML file.
+An interactive, single-page timeline of Artificial Intelligence milestones from the Dartmouth Conference (1956) to the present day. No frameworks, no build step, no dependencies — just one HTML file.
 
 ![AI Timeline preview](https://img.shields.io/badge/status-active-brightgreen) ![License](https://img.shields.io/badge/license-MIT-blue) ![Zero dependencies](https://img.shields.io/badge/dependencies-none-lightgrey)
 
@@ -8,8 +8,9 @@ An interactive, single-page timeline of Artificial Intelligence milestones from 
 
 ## Features
 
-- **40+ years of AI history** — curated milestones from expert systems (1980s) to autonomous AI agents (2025)
-- **Decade filter** — instantly narrow the view to any era
+- **70 years of AI history** — 28 curated milestones across 8 decades, from Dartmouth 1956 to autonomous agents in 2025
+- **Live origin counter** — real-time ticker (years · days · hours · min · sec) counting since 18 June 1956, with a link to the Wikipedia article on the Dartmouth Conference
+- **Decade filter** — instantly narrow the view to any of 8 eras (1950s through 2020s)
 - **Category tagging** — events classified as Research, Hardware/Data, Historic Milestone, Model/Architecture, or Product
 - **Scroll animations** — cards fade in via `IntersectionObserver` as you scroll
 - **Fully responsive** — collapses to a single-column layout on mobile
@@ -85,6 +86,7 @@ Events are hardcoded in the HTML. Each one follows this structure:
 | Single HTML file | Zero toolchain; trivially portable and deployable |
 | CSS custom properties | Consistent theming with no preprocessor needed |
 | `IntersectionObserver` | Native browser API; no scroll-event listeners to throttle |
+| `setInterval` counter | Lightweight live ticker with no external time library needed |
 | Hardcoded data | Keeps complexity minimal; a JSON/API backend would be overkill for this scope |
 | No TypeScript / bundler | Constraint of the project; complexity budget is intentionally low |
 
