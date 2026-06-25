@@ -1,0 +1,563 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Historia de la Inteligencia Artificial</title>
+  <style>
+    /* ── Reset & base ── */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg:        #0a0e1a;
+      --surface:   #111827;
+      --border:    #1e293b;
+      --accent1:   #6366f1;
+      --accent2:   #22d3ee;
+      --accent3:   #f472b6;
+      --text:      #e2e8f0;
+      --muted:     #64748b;
+      --line:      2px;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: 'Segoe UI', system-ui, sans-serif;
+      min-height: 100vh;
+      overflow-x: hidden;
+    }
+
+    /* ── Header ── */
+    header {
+      text-align: center;
+      padding: 5rem 1rem 3rem;
+      position: relative;
+      overflow: hidden;
+    }
+    header::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(ellipse 80% 60% at 50% 0%, #6366f133 0%, transparent 70%);
+      pointer-events: none;
+    }
+    header h1 {
+      font-size: clamp(2rem, 5vw, 3.5rem);
+      font-weight: 800;
+      background: linear-gradient(135deg, var(--accent1), var(--accent2), var(--accent3));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      letter-spacing: -1px;
+      line-height: 1.15;
+    }
+    header p {
+      margin-top: 1rem;
+      color: var(--muted);
+      font-size: 1.1rem;
+      max-width: 500px;
+      margin-inline: auto;
+    }
+
+    /* ── Decade filter ── */
+    .filters {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: .5rem;
+      padding: 1rem 1rem 2rem;
+    }
+    .filters button {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      color: var(--muted);
+      padding: .4rem 1rem;
+      border-radius: 999px;
+      cursor: pointer;
+      font-size: .85rem;
+      transition: all .2s;
+    }
+    .filters button:hover,
+    .filters button.active {
+      background: var(--accent1);
+      border-color: var(--accent1);
+      color: #fff;
+    }
+
+    /* ── Timeline container ── */
+    .timeline {
+      position: relative;
+      max-width: 860px;
+      margin: 0 auto;
+      padding: 0 1rem 6rem;
+    }
+
+    /* vertical line */
+    .timeline::before {
+      content: '';
+      position: absolute;
+      left: 50%;
+      top: 0; bottom: 0;
+      width: var(--line);
+      transform: translateX(-50%);
+      background: linear-gradient(to bottom, transparent, var(--accent1) 5%, var(--accent2) 50%, var(--accent3) 95%, transparent);
+    }
+
+    /* ── Decade header ── */
+    .decade-label {
+      text-align: center;
+      position: relative;
+      z-index: 1;
+      margin: 2.5rem 0 .5rem;
+    }
+    .decade-label span {
+      display: inline-block;
+      background: var(--bg);
+      border: 1px solid var(--border);
+      color: var(--accent2);
+      font-weight: 700;
+      font-size: .95rem;
+      letter-spacing: 3px;
+      padding: .3rem 1.2rem;
+      border-radius: 999px;
+      text-transform: uppercase;
+    }
+
+    /* ── Event card ── */
+    .event {
+      display: flex;
+      align-items: flex-start;
+      gap: 1.5rem;
+      margin: 1.5rem 0;
+      position: relative;
+      opacity: 0;
+      transform: translateY(20px);
+      transition: opacity .5s ease, transform .5s ease;
+    }
+    .event.visible { opacity: 1; transform: translateY(0); }
+
+    /* alternate sides */
+    .event:nth-child(odd)  { flex-direction: row-reverse; }
+
+    /* card */
+    .card {
+      flex: 1;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 1.1rem 1.3rem;
+      position: relative;
+      transition: border-color .25s, transform .25s, box-shadow .25s;
+      cursor: default;
+    }
+    .card:hover {
+      border-color: var(--accent1);
+      transform: translateY(-3px);
+      box-shadow: 0 8px 32px #6366f122;
+    }
+
+    /* arrow pointing to line */
+    .event:nth-child(even) .card::after {
+      content: '';
+      position: absolute;
+      right: -8px; top: 18px;
+      border: 8px solid transparent;
+      border-left-color: var(--border);
+    }
+    .event:nth-child(odd) .card::after {
+      content: '';
+      position: absolute;
+      left: -8px; top: 18px;
+      border: 8px solid transparent;
+      border-right-color: var(--border);
+    }
+
+    .card-year {
+      font-size: .78rem;
+      font-weight: 700;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      margin-bottom: .35rem;
+    }
+    .card-title {
+      font-size: 1rem;
+      font-weight: 700;
+      color: #f1f5f9;
+      margin-bottom: .4rem;
+      line-height: 1.3;
+    }
+    .card-desc {
+      font-size: .875rem;
+      color: var(--muted);
+      line-height: 1.6;
+    }
+    .tag {
+      display: inline-block;
+      font-size: .7rem;
+      font-weight: 600;
+      padding: .15rem .55rem;
+      border-radius: 999px;
+      margin-top: .6rem;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+
+    /* dot on the line */
+    .dot {
+      position: absolute;
+      left: 50%;
+      top: 18px;
+      width: 14px; height: 14px;
+      border-radius: 50%;
+      transform: translateX(-50%);
+      border: 2px solid var(--bg);
+      z-index: 2;
+      flex-shrink: 0;
+    }
+
+    /* spacer so cards don't overlap the dot column */
+    .spacer { width: 14px; flex-shrink: 0; }
+
+    /* tag colours by category */
+    .cat-research  { background: #6366f122; color: #818cf8; }
+    .cat-hardware  { background: #22d3ee22; color: #22d3ee; }
+    .cat-milestone { background: #f472b622; color: #f472b6; }
+    .cat-model     { background: #34d39922; color: #34d399; }
+    .cat-product   { background: #fbbf2422; color: #fbbf24; }
+
+    /* dot colour mirrors tag */
+    .event.cat-research  .dot { background: #818cf8; }
+    .event.cat-hardware  .dot { background: #22d3ee; }
+    .event.cat-milestone .dot { background: #f472b6; }
+    .event.cat-model     .dot { background: #34d399; }
+    .event.cat-product   .dot { background: #fbbf24; }
+
+    /* card-year colour */
+    .event.cat-research  .card-year { color: #818cf8; }
+    .event.cat-hardware  .card-year { color: #22d3ee; }
+    .event.cat-milestone .card-year { color: #f472b6; }
+    .event.cat-model     .card-year { color: #34d399; }
+    .event.cat-product   .card-year { color: #fbbf24; }
+
+    /* ── Legend ── */
+    .legend {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: .5rem 1rem;
+      padding: 0 1rem 2rem;
+      font-size: .8rem;
+      color: var(--muted);
+    }
+    .legend-item { display: flex; align-items: center; gap: .4rem; }
+    .legend-dot  { width: 10px; height: 10px; border-radius: 50%; flex-shrink: 0; }
+
+    /* ── Footer ── */
+    footer {
+      text-align: center;
+      padding: 2rem 1rem;
+      font-size: .8rem;
+      color: var(--muted);
+      border-top: 1px solid var(--border);
+    }
+
+    /* ── Responsive ── */
+    @media (max-width: 600px) {
+      .timeline::before { left: 18px; }
+      .event, .event:nth-child(odd) { flex-direction: column; padding-left: 44px; }
+      .dot { left: 18px; }
+      .spacer { display: none; }
+      .event .card::after,
+      .event:nth-child(odd) .card::after { display: none; }
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <h1>Historia de la<br>Inteligencia Artificial</h1>
+  <p>Cuatro décadas de avances que cambiaron el mundo</p>
+</header>
+
+<!-- Legend -->
+<div class="legend">
+  <div class="legend-item"><div class="legend-dot" style="background:#818cf8"></div> Investigación</div>
+  <div class="legend-item"><div class="legend-dot" style="background:#22d3ee"></div> Hardware / Datos</div>
+  <div class="legend-item"><div class="legend-dot" style="background:#f472b6"></div> Hito histórico</div>
+  <div class="legend-item"><div class="legend-dot" style="background:#34d399"></div> Modelo / Arquitectura</div>
+  <div class="legend-item"><div class="legend-dot" style="background:#fbbf24"></div> Producto</div>
+</div>
+
+<!-- Decade filter -->
+<div class="filters">
+  <button class="active" data-filter="all">Todos</button>
+  <button data-filter="1980">1980s</button>
+  <button data-filter="1990">1990s</button>
+  <button data-filter="2000">2000s</button>
+  <button data-filter="2010">2010s</button>
+  <button data-filter="2020">2020s</button>
+</div>
+
+<div class="timeline" id="timeline">
+
+  <!-- ══ 1980s ══ -->
+  <div class="decade-label" data-decade="1980"><span>1980s</span></div>
+
+  <div class="event cat-product" data-decade="1980">
+    <div class="dot"></div><div class="spacer"></div>
+    <div class="card">
+      <div class="card-year">1980</div>
+      <div class="card-title">Boom de los Sistemas Expertos</div>
+      <div class="card-desc">Empresas como DEC adoptan sistemas expertos (XCON) en producción. La IA parece lista para dominar la industria.</div>
+      <span class="tag cat-product">Producto</span>
+    </div>
+  </div>
+
+  <div class="event cat-research" data-decade="1980">
+    <div class="dot"></div><div class="spacer"></div>
+    <div class="card">
+      <div class="card-year">1986</div>
+      <div class="card-title">Retropropagación popularizada</div>
+      <div class="card-desc">Rumelhart, Hinton y Williams publican el algoritmo de backpropagation, base del entrenamiento de redes neuronales profundas.</div>
+      <span class="tag cat-research">Investigación</span>
+    </div>
+  </div>
+
+  <div class="event cat-model" data-decade="1980">
+    <div class="dot"></div><div class="spacer"></div>
+    <div class="card">
+      <div class="card-year">1989</div>
+      <div class="card-title">LeNet — Primeras CNN</div>
+      <div class="card-desc">Yann LeCun desarrolla LeNet en Bell Labs, la primera red convolucional funcional para reconocimiento de dígitos escritos a mano.</div>
+      <span class="tag cat-model">Modelo</span>
+    </div>
+  </div>
+
+  <!-- ══ 1990s ══ -->
+  <div class="decade-label" data-decade="1990"><span>1990s</span></div>
+
+  <div class="event cat-milestone" data-decade="1990">
+    <div class="dot"></div><div class="spacer"></div>
+    <div class="card">
+      <div class="card-year">1997</div>
+      <div class="card-title">Deep Blue vence a Kasparov</div>
+      <div class="card-desc">La supercomputadora de IBM derrota al campeón mundial de ajedrez Garry Kasparov, marcando un hito simbólico para la IA.</div>
+      <span class="tag cat-milestone">Hito histórico</span>
+    </div>
+  </div>
+
+  <div class="event cat-research" data-decade="1990">
+    <div class="dot"></div><div class="spacer"></div>
+    <div class="card">
+      <div class="card-year">1998</div>
+      <div class="card-title">LSTM y memoria a largo plazo</div>
+      <div class="card-desc">Hochreiter y Schmidhuber perfeccionan las redes LSTM, capaces de aprender dependencias temporales largas, clave para NLP y voz.</div>
+      <span class="tag cat-research">Investigación</span>
+    </div>
+  </div>
+
+  <!-- ══ 2000s ══ -->
+  <div class="decade-label" data-decade="2000"><span>2000s</span></div>
+
+  <div class="event cat-research" data-decade="2000">
+    <div class="dot"></div><div class="spacer"></div>
+    <div class="card">
+      <div class="card-year">2006</div>
+      <div class="card-title">Renacimiento del Deep Learning</div>
+      <div class="card-desc">Geoffrey Hinton publica las Deep Belief Networks, demostrando que las redes profundas pueden entrenarse capa a capa de forma eficiente.</div>
+      <span class="tag cat-research">Investigación</span>
+    </div>
+  </div>
+
+  <div class="event cat-hardware" data-decade="2000">
+    <div class="dot"></div><div class="spacer"></div>
+    <div class="card">
+      <div class="card-year">2009</div>
+      <div class="card-title">Dataset ImageNet</div>
+      <div class="card-desc">Fei-Fei Li lanza ImageNet con más de 14 millones de imágenes etiquetadas, catalizador del boom de visión artificial de la siguiente década.</div>
+      <span class="tag cat-hardware">Datos</span>
+    </div>
+  </div>
+
+  <!-- ══ 2010s ══ -->
+  <div class="decade-label" data-decade="2010"><span>2010s</span></div>
+
+  <div class="event cat-milestone" data-decade="2010">
+    <div class="dot"></div><div class="spacer"></div>
+    <div class="card">
+      <div class="card-year">2011</div>
+      <div class="card-title">IBM Watson gana en Jeopardy!</div>
+      <div class="card-desc">Watson derrota a los dos mejores campeones humanos de Jeopardy!, demostrando comprensión del lenguaje natural a gran escala.</div>
+      <span class="tag cat-milestone">Hito histórico</span>
+    </div>
+  </div>
+
+  <div class="event cat-model" data-decade="2010">
+    <div class="dot"></div><div class="spacer"></div>
+    <div class="card">
+      <div class="card-year">2012</div>
+      <div class="card-title">AlexNet — Revolución del Deep Learning</div>
+      <div class="card-desc">AlexNet gana ImageNet con una precisión sin precedentes usando GPUs, iniciando la era moderna del aprendizaje profundo.</div>
+      <span class="tag cat-model">Modelo</span>
+    </div>
+  </div>
+
+  <div class="event cat-research" data-decade="2010">
+    <div class="dot"></div><div class="spacer"></div>
+    <div class="card">
+      <div class="card-year">2014</div>
+      <div class="card-title">GANs — Redes Generativas Adversarias</div>
+      <div class="card-desc">Ian Goodfellow propone las GAN, donde dos redes compiten entre sí. Base de la generación de imágenes realistas y deepfakes.</div>
+      <span class="tag cat-research">Investigación</span>
+    </div>
+  </div>
+
+  <div class="event cat-milestone" data-decade="2010">
+    <div class="dot"></div><div class="spacer"></div>
+    <div class="card">
+      <div class="card-year">2016</div>
+      <div class="card-title">AlphaGo vence a Lee Sedol</div>
+      <div class="card-desc">DeepMind derrota al campeón mundial de Go, juego considerado el gran reto del razonamiento intuitivo, usando aprendizaje por refuerzo.</div>
+      <span class="tag cat-milestone">Hito histórico</span>
+    </div>
+  </div>
+
+  <div class="event cat-model" data-decade="2010">
+    <div class="dot"></div><div class="spacer"></div>
+    <div class="card">
+      <div class="card-year">2017</div>
+      <div class="card-title">Arquitectura Transformer</div>
+      <div class="card-desc">"Attention is All You Need" de Google Brain introduce los Transformers, la arquitectura que subyace a todos los LLMs modernos.</div>
+      <span class="tag cat-model">Modelo</span>
+    </div>
+  </div>
+
+  <div class="event cat-model" data-decade="2010">
+    <div class="dot"></div><div class="spacer"></div>
+    <div class="card">
+      <div class="card-year">2018</div>
+      <div class="card-title">BERT y GPT-1</div>
+      <div class="card-desc">Google lanza BERT (comprensión bidireccional) y OpenAI presenta GPT-1, sentando las bases del preentrenamiento a gran escala.</div>
+      <span class="tag cat-model">Modelo</span>
+    </div>
+  </div>
+
+  <div class="event cat-product" data-decade="2010">
+    <div class="dot"></div><div class="spacer"></div>
+    <div class="card">
+      <div class="card-year">2019</div>
+      <div class="card-title">GPT-2 — Demasiado peligroso para publicar</div>
+      <div class="card-desc">OpenAI retarda la publicación de GPT-2 alegando riesgo de desinformación, generando debate global sobre la ética en IA.</div>
+      <span class="tag cat-product">Producto</span>
+    </div>
+  </div>
+
+  <!-- ══ 2020s ══ -->
+  <div class="decade-label" data-decade="2020"><span>2020s</span></div>
+
+  <div class="event cat-model" data-decade="2020">
+    <div class="dot"></div><div class="spacer"></div>
+    <div class="card">
+      <div class="card-year">2020</div>
+      <div class="card-title">GPT-3 — 175 000 millones de parámetros</div>
+      <div class="card-desc">OpenAI lanza GPT-3, mostrando que escalar parámetros produce capacidades emergentes sorprendentes de razonamiento y código.</div>
+      <span class="tag cat-model">Modelo</span>
+    </div>
+  </div>
+
+  <div class="event cat-milestone" data-decade="2020">
+    <div class="dot"></div><div class="spacer"></div>
+    <div class="card">
+      <div class="card-year">2021</div>
+      <div class="card-title">AlphaFold 2 — Biología proteica resuelta</div>
+      <div class="card-desc">DeepMind resuelve el problema del plegamiento de proteínas con precisión atómica, revolucionando la biología estructural y la medicina.</div>
+      <span class="tag cat-milestone">Hito histórico</span>
+    </div>
+  </div>
+
+  <div class="event cat-product" data-decade="2020">
+    <div class="dot"></div><div class="spacer"></div>
+    <div class="card">
+      <div class="card-year">2021</div>
+      <div class="card-title">GitHub Copilot y DALL-E</div>
+      <div class="card-desc">GitHub Copilot lleva la IA al código profesional. DALL-E demuestra generación de imágenes desde texto, abriendo la era multimodal.</div>
+      <span class="tag cat-product">Producto</span>
+    </div>
+  </div>
+
+  <div class="event cat-product" data-decade="2020">
+    <div class="dot"></div><div class="spacer"></div>
+    <div class="card">
+      <div class="card-year">2022</div>
+      <div class="card-title">ChatGPT — La IA llega al gran público</div>
+      <div class="card-desc">ChatGPT alcanza 1 millón de usuarios en 5 días. Estable Diffusion democratiza la generación de imágenes de código abierto.</div>
+      <span class="tag cat-product">Producto</span>
+    </div>
+  </div>
+
+  <div class="event cat-model" data-decade="2020">
+    <div class="dot"></div><div class="spacer"></div>
+    <div class="card">
+      <div class="card-year">2023</div>
+      <div class="card-title">GPT-4, Llama, Gemini y Claude</div>
+      <div class="card-desc">Explosion de modelos frontier: GPT-4 supera el bar del examen MBE. Meta abre Llama. Google lanza Gemini. Anthropic lanza Claude.</div>
+      <span class="tag cat-model">Modelo</span>
+    </div>
+  </div>
+
+  <div class="event cat-product" data-decade="2020">
+    <div class="dot"></div><div class="spacer"></div>
+    <div class="card">
+      <div class="card-year">2024</div>
+      <div class="card-title">Sora, GPT-4o y modelos multimodales</div>
+      <div class="card-desc">OpenAI presenta Sora (vídeo desde texto) y GPT-4o (voz, imagen y texto en tiempo real). Los modelos de razonamiento o1 emergen.</div>
+      <span class="tag cat-product">Producto</span>
+    </div>
+  </div>
+
+  <div class="event cat-milestone" data-decade="2020">
+    <div class="dot"></div><div class="spacer"></div>
+    <div class="card">
+      <div class="card-year">2025</div>
+      <div class="card-title">Era de los Agentes de IA</div>
+      <div class="card-desc">Claude 4, GPT-5 y Gemini 3 lideran el cambio hacia agentes autónomos capaces de planear, ejecutar código y resolver tareas complejas de forma independiente.</div>
+      <span class="tag cat-milestone">Hito histórico</span>
+    </div>
+  </div>
+
+</div><!-- /.timeline -->
+
+<footer>
+  Línea de tiempo de la IA &mdash; Principales hitos desde 1980 hasta 2025
+</footer>
+
+<script>
+  // ── Intersection Observer for fade-in ──
+  const events = document.querySelectorAll('.event');
+  const io = new IntersectionObserver(entries => {
+    entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+  }, { threshold: 0.15 });
+  events.forEach(ev => io.observe(ev));
+
+  // ── Decade filter ──
+  const btns = document.querySelectorAll('.filters button');
+  btns.forEach(btn => {
+    btn.addEventListener('click', () => {
+      btns.forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      const f = btn.dataset.filter;
+      document.querySelectorAll('.event, .decade-label').forEach(el => {
+        if (f === 'all') {
+          el.style.display = '';
+        } else {
+          el.style.display = el.dataset.decade === f ? '' : 'none';
+        }
+      });
+    });
+  });
+</script>
+</body>
+</html>
