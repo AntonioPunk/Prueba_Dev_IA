@@ -40,7 +40,7 @@ Open [http://localhost:8080/ai-timeline.html](http://localhost:8080/ai-timeline.
 ```
 .
 ├── ai-timeline.html   # Entire application — HTML + CSS + JS in one file
-├── AGENTS.MD          # Guidelines for AI agents and automated contributors
+├── AGENTS.md          # Guidelines for AI agents and automated contributors
 └── README.md          # This file
 ```
 
@@ -67,7 +67,7 @@ Events are hardcoded in the HTML. Each one follows this structure:
 
 **Rules to follow when adding an event:**
 
-1. Place it inside the correct `<!-- ══ 20XXs ══ -->` block.
+1. Place it inside the correct `<!-- ══ 19XXs / 20XXs ══ -->` block (e.g. `<!-- ══ 1950s ══ -->`).
 2. Set `data-decade` to the opening year of the decade (e.g. `"2010"` for 2012).
 3. Apply one category class to both `.event` and `.tag`.
 4. Add a `.card-link` anchor with a URL pointing to the relevant Wikipedia article or original paper.
@@ -99,7 +99,7 @@ Events are hardcoded in the HTML. Each one follows this structure:
 ## Contributing
 
 1. Fork the repository.
-2. Add or update events following the guidelines in [AGENTS.MD](AGENTS.MD).
+2. Add or update events following the guidelines in [AGENTS.md](AGENTS.md).
 3. Test locally (`python3 -m http.server 8080`) and verify the layout at multiple viewport widths.
 4. Open a pull request with a clear description of the change.
 
