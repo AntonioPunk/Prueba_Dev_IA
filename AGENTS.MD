@@ -13,7 +13,7 @@ Este archivo documenta las directrices para agentes y colaboradores que trabajan
 1. Mantener el repositorio pequeño y simple.
 2. No agregar dependencias nuevas si no son necesarias.
 3. No crear carpetas nuevas ni reorganizar la estructura existente sin una razón clara.
-4. Documentar cualquier cambio importante en `AGENT.md` y, si procede, en `AGENTS.MD`.
+4. Documentar cualquier cambio importante en `AGENTS.MD`.
 
 ## Cómo contribuir
 - Para cambios de contenido o eventos:
@@ -45,5 +45,5 @@ Este archivo documenta las directrices para agentes y colaboradores que trabajan
 - Acceder a `http://localhost:8080/ai-timeline.html`.
 
 ## Notas adicionales
-- El archivo `AGENT.md` describe la arquitectura y el flujo de edición de contenido.
-- `AGENTS.MD` sirve como guía para agentes que automatizan o asisten con cambios en el repositorio.
+- `AGENTS.MD` describe la arquitectura y el flujo de edición de contenido para este repositorio.
+- Debe usarse como guía principal para agentes que automatizan o asisten con cambios.
