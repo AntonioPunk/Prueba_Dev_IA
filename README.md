@@ -40,11 +40,13 @@ Open [http://localhost:8080/ai-timeline.html](http://localhost:8080/ai-timeline.
 ```
 .
 ├── ai-timeline.html   # Entire application — HTML + CSS + JS in one file
-├── AGENTS.md          # Guidelines for AI agents and automated contributors
-└── README.md          # This file
+├── README.md          # This file
+└── AGENTS.md          # Local-only contributor guidelines (git-ignored)
 ```
 
 The deliberate choice to keep everything in a single file is a constraint, not an oversight. It means the project has no toolchain overhead and can be shared as a single attachment or dropped into any web server with zero configuration.
+
+> `AGENTS.md` is excluded from the repository via `.gitignore`. It lives only on each contributor’s local machine and defines the architectural contracts that govern all changes to this project.
 
 ---
 
@@ -99,7 +101,7 @@ Events are hardcoded in the HTML. Each one follows this structure:
 ## Contributing
 
 1. Fork the repository.
-2. Add or update events following the guidelines in [AGENTS.md](AGENTS.md).
+2. Add or update events following the architectural guidelines in `AGENTS.md` (local-only, not tracked by git).
 3. Test locally (`python3 -m http.server 8080`) and verify the layout at multiple viewport widths.
 4. Open a pull request with a clear description of the change.
 
