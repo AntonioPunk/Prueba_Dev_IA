@@ -1,0 +1,24 @@
+# Sistema operativo
+.DS_Store
+Thumbs.db
+Desktop.ini
+
+# Editores y archivos temporales
+.idea/
+*.swp
+*.swo
+*~
+
+# Python: servidor local y herramientas auxiliares
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.venv/
+venv/
+env/
+
+# Cobertura y artefactos de análisis
+.coverage
+htmlcov/
+.mypy_cache/
+.ruff_cache/
